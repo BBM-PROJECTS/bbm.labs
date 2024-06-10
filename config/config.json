@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "snapster",
+    "password": "MvUMh$lX9)LGUeGx3)L1",
+    "database": "bbm_labs_uat",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "root",
+    "password": null,
+    "database": "database_test",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "snapster",
+    "password": "MvUMh$lX9)LGUeGx3)L1",
+    "database": "bbm_labs_uat",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  }
+}
