@@ -109,6 +109,15 @@ const challengeValidationRules = {
 	],
 };
 
+const paymentDetailsValidationRules = {
+	paymentDetails: [
+		body("amount").isInt({ min: 0 }).withMessage("Amount must be a positive integer."),
+		body("accountsizeID").notEmpty().withMessage("Account size ID is required."),
+		body("userID").notEmpty().withMessage("User ID is required."),
+		body("currency").isString().notEmpty().withMessage("Currency is required."),
+	],
+};
+
 module.exports = {
 	authValidationRules,
 	contactValidationRules,
@@ -116,4 +125,5 @@ module.exports = {
 	challengeValidationRules,
 	newsletterValidationRules,
 	accountSizeValidationRules,
+	paymentDetailsValidationRules,
 };

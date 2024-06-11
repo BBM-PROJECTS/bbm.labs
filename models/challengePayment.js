@@ -54,6 +54,5 @@ module.exports = (sequelize, DataTypes) => {
 			tableName: "challenge_payments",
 		},
 	);
-
 	return ChallengePayment;
 };

@@ -13,7 +13,7 @@ module.exports = {
 	ContactController,
 	NewsletterController,
 	PropFirmController,
-  ChallengeController,
+	ChallengeController,
 	AccountSizeController,
-  ChallengePaymentController
+	ChallengePaymentController
 };

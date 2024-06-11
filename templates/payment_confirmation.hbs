@@ -1,0 +1,22 @@
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Payment Confirmation</title>
+		<style>
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<h1>Payment Confirmation</h1>
+			<p>Hello {{username}},</p>
+			<p>Your payment for account size {{accountSize}} has been successfully processed.</p>
+			<p>Challenge: {{challenge}}</p>
+			<p>Account Fee: {{accountFee}}</p>
+			<p>Total Cost: {{totalCost}}</p>
+			<p>Address Used: {{addressUsed}}</p>
+			<p>Confirmation Link: <a href="{{confirmationLink}}">Click here to confirm</a></p>
+			<p>Thank you for your payment.</p>
+		</div>
+	</body>
+</html>

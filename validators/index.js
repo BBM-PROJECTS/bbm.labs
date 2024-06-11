@@ -5,6 +5,7 @@ const {
 	challengeValidationRules,
 	newsletterValidationRules,
 	accountSizeValidationRules,
+	paymentDetailsValidationRules,
 } = require("./validator.js");
 
 module.exports = {
@@ -14,4 +15,5 @@ module.exports = {
 	challengeValidationRules,
 	newsletterValidationRules,
 	accountSizeValidationRules,
+	paymentDetailsValidationRules,
 };

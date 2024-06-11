@@ -5,13 +5,15 @@ const propFirmRoutes = require("./propFirm.js");
 const challengeRoutes = require("./challenge.js");
 const newsletterRoutes = require("./newsletter.js");
 const accountSizeRoutes = require("./accountSize.js");
+const paymentRoutes = require("./payment.js");
 
 module.exports = {
 	authRoutes,
 	lookupRoutes,
 	contactRoutes,
 	propFirmRoutes,
-  challengeRoutes,
+	challengeRoutes,
 	newsletterRoutes,
 	accountSizeRoutes,
+	paymentRoutes,
 };
