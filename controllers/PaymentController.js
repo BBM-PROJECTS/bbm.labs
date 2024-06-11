@@ -23,13 +23,13 @@ const cancelPayment = async (userID, challengeID) => {
         if (challengePayment) {
             challengePayment.status = 'canceled';
             await challengePayment.save();
-            return true;
+            return responseSerializer.format(true, "Payment canceled", null);
         } else {
-            return false;
+            return responseSerializer.format(false, "Error: Unable to cancel payment", null);
         }
     } catch (error) {
         console.error("Error cancelling payment:", error);
-        return false;
+        return responseSerializer.format(false, "Error cancelling payment", null);
     }
 };
 
@@ -40,13 +40,13 @@ const deletePayment = async (userID, challengeID) => {
             challengePayment.status = 'deleted';
             challengePayment.deleted_at = new Date();
             await challengePayment.save();
-            return true;
+            return responseSerializer.format(true, "Payment deleted", null);
         } else {
-            return false;
+            return responseSerializer.format(false, "Error: Unable to delete payment", null);
         }
     } catch (error) {
         console.error("Error deleting payment:", error);
-        return false;
+        return responseSerializer.format(false, "Error deleting payment", null);
     }
 };
 
@@ -120,7 +120,7 @@ const PaymentController = {
         const { address, amount, userID, challengeID } = req.body;
         const paymentConfirmed = await LookupController.checkPaymentAmountExists({ address, amount, userID, challengeID });
         if (paymentConfirmed) {
-            res.status(200).json({ success: true, message: "Payment confirmed" });
+            res.status(200).json(responseSerializer.format(true, "Payment confirmed", null));
         } else {
             const challengePayment = await db.ChallengePayment.findOne({ where: { userID, challengeID }});
             if (challengePayment && challengePayment.amount === amount) {
@@ -128,9 +128,9 @@ const PaymentController = {
                 challengePayment.amount = newAmount;
                 challengePayment.totalAmountPaid += amount;
                 await challengePayment.save();
-                res.status(200).json({ success: true, message: "Challenge payment updated" });
+                res.status(200).json(responseSerializer.format(true, "Challenge payment updated", null));
             } else {
-                res.status(400).json({ success: false, message: "Error: Payment not confirmed" });
+                res.status(400).json(responseSerializer.format(false, "Error: Payment not confirmed", null));
             }
         }
     },
@@ -140,14 +140,14 @@ const PaymentController = {
       cancelPayment(userID, challengeID)
         .then((result) => {
           if (result) {
-            res.status(200).json({ success: true, message: "Payment canceled" });
+            res.status(200).json(result);
           } else {
-            res.status(400).json({ success: false, message: "Error: Unable to cancel payment" });
+            res.status(400).json(result);
           }
         })
         .catch((error) => {
           console.error("Error cancelling payment:", error);
-          res.status(500).json({ success: false, message: "Error cancelling payment" });
+          res.status(500).json(responseSerializer.format(false, "Error cancelling payment", null));
         });
     },
 
@@ -156,14 +156,14 @@ const PaymentController = {
       deletePayment(userID, challengeID)
         .then((result) => {
           if (result) {
-            res.status(200).json({ success: true, message: "Payment deleted" });
+            res.status(200).json(result);
           } else {
-            res.status(400).json({ success: false, message: "Error: Unable to delete payment" });
+            res.status(400).json(result);
           }
         })
         .catch((error) => {
           console.error("Error deleting payment:", error);
-          res.status(500).json({ success: false, message: "Error deleting payment" });
+          res.status(500).json(responseSerializer.format(false, "Error deleting payment", null));
         });
     },
 
