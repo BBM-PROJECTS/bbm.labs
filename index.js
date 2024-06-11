@@ -5,23 +5,15 @@ const { authRoutes, lookupRoutes, newsletterRoutes, contactRoutes, propFirmRoute
 
 // MIDDLEWARES
 const { cors, listRoutes } = require("./middlewares/index.js");
-const { OpenApiValidator } = require('express-openapi-validator');
 
 dotenv.config();
-
 const app = express();
-const swaggerUi = require('swagger-ui-express');
-const swaggerDocument = require('./swagger.json');
 const PORT = process.env.PORT || 8005;
 
 // Middleware
 app.use(cors);
 app.use(bodyParser.json());
-var options = {
-	explorer: true
-  };
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, options));
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/lookup", lookupRoutes);
 app.use("/api/v1/contact", contactRoutes);
