@@ -29,6 +29,11 @@ module.exports = (sequelize, DataTypes) => {
 				type: DataTypes.INTEGER,
 				allowNull: false,
 			},
+			status: {
+				type: DataTypes.STRING,
+				allowNull: false,
+				defaultValue: "pending",
+			},
 			paid_at: {
 				type: DataTypes.DATE,
 				allowNull: false,
@@ -44,6 +49,10 @@ module.exports = (sequelize, DataTypes) => {
 				allowNull: false,
 				defaultValue: DataTypes.NOW,
 			},
+			deleted_at: {
+				type: DataTypes.DATE,
+				allowNull: true,
+			  },
 		},
 		{
 			sequelize,

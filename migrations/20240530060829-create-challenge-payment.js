@@ -32,6 +32,11 @@ module.exports = {
                 allowNull: false,
                 type: Sequelize.INTEGER
             },
+            status: {
+				type: Sequelize.STRING,
+				allowNull: false,
+				defaultValue: "pending",
+			},
             paid_at: {
                 allowNull: false,
                 type: Sequelize.DATE,
@@ -46,7 +51,11 @@ module.exports = {
                 allowNull: false,
                 type: Sequelize.DATE,
                 defaultValue: Sequelize.fn('now')
-            }
+            },
+            deleted_at: {
+                type: Sequelize.DATE,
+                allowNull: true,
+              },
         });
     },
     down: async (queryInterface, Sequelize) => {

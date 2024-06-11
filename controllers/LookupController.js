@@ -39,6 +39,50 @@ const LookupController = {
     }
   },
 
+  async checkPaymentAmountExists(req, res) {
+    require('dotenv').config();
+    const apiKey = process.env.TRONSCAN_API_KEY;
+    const endpoint = process.env.TRONSCAN_ENDPOINT;
+        if (!req.body || !req.body.address) {
+        if (res) {
+            return res.status(400).json({ error: 'Address is missing in the request body' });
+        } else {
+            console.error('Address is missing in the request body');
+            return; 
+        }
+    }
+    const walletAddress = req.body.address;
+    const amount = req.body.amount;
+    try {
+        const contractAddress = 'TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t';
+        const toAddress = req.body.address;
+
+        const response = await axios.get(`${endpoint}?toAddress=${contractAddress}&toAddress=${toAddress}`, {
+            headers: {
+                'TRON-PRO-API-KEY': apiKey
+            }
+        });
+        const data = response.data;
+        console.log(data);
+        const transactions = data.data;
+        transactions.forEach(transaction => {
+            if (transaction.toAddress === walletAddress && transaction.contractData.amount === amount) {
+                console.log('Payment amount exists for the walletAddress');
+            }
+        });
+        if (res) {
+            res.status(200).json({ message: 'Payment amount checked successfully' });
+        }
+    } catch (error) {
+        console.error(error);
+        if (res) {
+            res.status(500).json({ error: 'An error occurred while checking payment amount' });
+        } else {
+            console.error('An error occurred while checking payment amount');
+        }
+    }
+  },
+
   async checkUsernameAvailability(req, res) {
     const username = req.query.username;
 
